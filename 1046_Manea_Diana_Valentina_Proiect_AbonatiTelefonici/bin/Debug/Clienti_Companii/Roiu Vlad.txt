@@ -1,0 +1,9 @@
+Nume: Roiu
+Prenume: Vlad
+Numar de telefon: 0787647264
+Email: Zandrei@gmail.com
+Adresa: Str.Ninsorii, Nr908
+Parola: 654321
+Data de nastere: Wednesday, December 6, 2000
+Tip Utilizator: Client
+Sex: F

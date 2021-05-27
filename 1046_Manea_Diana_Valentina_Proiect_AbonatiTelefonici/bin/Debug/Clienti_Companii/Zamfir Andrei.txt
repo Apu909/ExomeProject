@@ -1,0 +1,9 @@
+Nume: Zamfir
+Prenume: Andrei
+Numar de telefon: 0783647264
+Email: Zandrei@gmail.com
+Adresa: Str.Garii, Nr76
+Parola: 123456
+Data de nastere: Wednesday, December 6, 2000
+Tip Utilizator: Client
+Sex: F
