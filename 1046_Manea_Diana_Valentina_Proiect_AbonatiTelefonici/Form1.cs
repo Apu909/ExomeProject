@@ -26,15 +26,18 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
     );
 
         Clienti cln = new Clienti();
-        UCclientiPlataFacturi plataFacturi = new UCclientiPlataFacturi();
+        UCclientiPlataFacturi plataFacturi;
         UCClientAbonamente clab;
-        UserControlAbMeu ucAbonamentulMeu = new UserControlAbMeu();
+        //UserControlAbMeu ucAbonamentulMeu = new UserControlAbMeu();
+        UserControlAbMeu ucAbonamentulMeu;
         public Form1(Clienti client)
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             cln = client.Clone();
             clab = new UCClientAbonamente(cln);
+            ucAbonamentulMeu = new UserControlAbMeu(cln);
+            plataFacturi = new UCclientiPlataFacturi(cln);
             uCclientiPlataFacturi1.Hide();
             ucAbonamentulMeu.Hide();
             ucClientAbonamente1.Hide();

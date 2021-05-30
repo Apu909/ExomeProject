@@ -23,7 +23,7 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
         public UCClientAbonamente()
         {
             InitializeComponent();
-            connString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Abonamente.accdb";
+            //connString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Abonamente.accdb";
             connString2 = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Clienti.accdb";
             incarca_date();
             AutoScrollMinSize = new Size(0, 1);
@@ -48,7 +48,7 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
             String smsAb;
             int x = 10;
             int y = 100;
-            OleDbConnection conexiune = new OleDbConnection(connString);
+            OleDbConnection conexiune = new OleDbConnection(connString2);
             try
             {
                 conexiune.Open();

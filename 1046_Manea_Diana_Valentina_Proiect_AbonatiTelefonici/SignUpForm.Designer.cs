@@ -295,6 +295,8 @@
             this.tbNume.Size = new System.Drawing.Size(204, 24);
             this.tbNume.TabIndex = 7;
             this.tbNume.Text = "Nume";
+            this.tbNume.Enter += new System.EventHandler(this.tbNume_Enter);
+            this.tbNume.Leave += new System.EventHandler(this.tbNume_Leave);
             // 
             // tbPrenume
             // 
@@ -308,6 +310,8 @@
             this.tbPrenume.Size = new System.Drawing.Size(204, 24);
             this.tbPrenume.TabIndex = 7;
             this.tbPrenume.Text = "Prenume";
+            this.tbPrenume.Enter += new System.EventHandler(this.tbPrenume_Enter);
+            this.tbPrenume.Leave += new System.EventHandler(this.tbPrenume_Leave);
             this.tbPrenume.Validating += new System.ComponentModel.CancelEventHandler(this.tbPrenume_Validating);
             // 
             // tbNrTel
@@ -322,6 +326,8 @@
             this.tbNrTel.Size = new System.Drawing.Size(204, 24);
             this.tbNrTel.TabIndex = 7;
             this.tbNrTel.Text = "Numar de telefon";
+            this.tbNrTel.Enter += new System.EventHandler(this.tbNrTel_Enter);
+            this.tbNrTel.Leave += new System.EventHandler(this.tbNrTel_Leave);
             // 
             // tbEmail
             // 
@@ -335,6 +341,8 @@
             this.tbEmail.Size = new System.Drawing.Size(204, 24);
             this.tbEmail.TabIndex = 7;
             this.tbEmail.Text = "Email";
+            this.tbEmail.Enter += new System.EventHandler(this.tbEmail_Enter);
+            this.tbEmail.Leave += new System.EventHandler(this.tbEmail_Leave);
             // 
             // tbAdresa
             // 
@@ -348,6 +356,8 @@
             this.tbAdresa.Size = new System.Drawing.Size(204, 24);
             this.tbAdresa.TabIndex = 7;
             this.tbAdresa.Text = "Adresa";
+            this.tbAdresa.Enter += new System.EventHandler(this.tbAdresa_Enter);
+            this.tbAdresa.Leave += new System.EventHandler(this.tbAdresa_Leave);
             // 
             // tbParola
             // 
@@ -361,6 +371,8 @@
             this.tbParola.Size = new System.Drawing.Size(204, 24);
             this.tbParola.TabIndex = 7;
             this.tbParola.Text = "Parola";
+            this.tbParola.Enter += new System.EventHandler(this.tbParola_Enter);
+            this.tbParola.Leave += new System.EventHandler(this.tbParola_Leave);
             // 
             // tbConfParola
             // 
@@ -374,6 +386,8 @@
             this.tbConfParola.Size = new System.Drawing.Size(204, 24);
             this.tbConfParola.TabIndex = 7;
             this.tbConfParola.Text = "Confirmare parola";
+            this.tbConfParola.Enter += new System.EventHandler(this.tbConfParola_Enter);
+            this.tbConfParola.Leave += new System.EventHandler(this.tbConfParola_Leave);
             // 
             // label2
             // 

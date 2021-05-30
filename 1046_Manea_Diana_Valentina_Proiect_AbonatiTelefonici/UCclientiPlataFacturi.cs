@@ -14,7 +14,7 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
     public partial class UCclientiPlataFacturi : UserControl
     {
         string connString;
-        Clienti client;
+        Clienti client =  new Clienti();
         public UCclientiPlataFacturi()
         {
             InitializeComponent();
@@ -26,14 +26,17 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
             }
         }
 
-        public UCclientiPlataFacturi(Clienti client) : base()
+        public UCclientiPlataFacturi(Clienti cl)
         {
-            this.client = client.Clone();
+            InitializeComponent();
+            connString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Clienti.accdb";
+            this.client = (Clienti)cl.Clone();
             incarcaDate();
         }
 
         private void incarcaDate()
         {
+            String numePrenume = client.Nume + " " + client.Prenume;
             listView1.Items.Clear();
 
             OleDbConnection conexiune = new OleDbConnection(connString);
@@ -42,7 +45,7 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
                 conexiune.Open();
                 OleDbCommand comanda = new OleDbCommand();
                 comanda.Connection = conexiune;
-                comanda.CommandText = "SELECT Nume_Client, Numar_de_Telefon, Email, Adresa, Nume_Abonament, Pret_Abonament FROM Facturi";
+                comanda.CommandText = "SELECT Nume_Client, Numar_de_Telefon, Email, Adresa, Nume_Abonament, Pret_Abonament FROM Facturi WHERE Nume_Client = 'Costea Mihai';";
 
                 OleDbDataReader reader = comanda.ExecuteReader();
                 while (reader.Read())

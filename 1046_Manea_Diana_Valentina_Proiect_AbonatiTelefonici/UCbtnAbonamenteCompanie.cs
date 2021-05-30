@@ -171,8 +171,7 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
                     {
                     if (itm.Bounds.IntersectsWith(pictureBox1.Bounds))
                     {
-                        //int cod = Convert.ToInt32(itm.SubItems[0].Text);
-                        MessageBox.Show("Overlapapapappa");
+                        MessageBox.Show("Abonamentul a fost sters din baza de date.");
                         comanda.CommandText = "DELETE FROM Abonamente WHERE NumeAbonament='" + itm.NumeAb + "'";
                         this.Controls.Remove(itm);
                         comanda.ExecuteNonQuery();

@@ -79,7 +79,7 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
 
             if (isValid == false)
             {
-                MessageBox.Show("Username sau parolsdsdsda invalida.");
+                MessageBox.Show("Username sau parola invalida.");
                 tbUsername.Clear();
                 tbPassword.Clear();
                 tbUsername.Focus();

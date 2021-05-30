@@ -49,7 +49,6 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
             {
 
             }
-
         }
 
         private void btnCreeaza_Click(object sender, EventArgs e)
@@ -57,6 +56,7 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
             OleDbConnection conexiune = new OleDbConnection(connString);
             try
             {
+                bool isValid = true;
                 conexiune.Open();
                 OleDbCommand comanda = new OleDbCommand();
                 comanda.Connection = conexiune;
@@ -68,21 +68,84 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
                 comanda.CommandText = "INSERT INTO Clienti VALUES(?,?,?,?,?,?,?,?,?,?)";
 
                 comanda.Parameters.Add("Id", OleDbType.Integer).Value = Convert.ToInt32(cod);
-                comanda.Parameters.Add("Nume", OleDbType.Char, 20).Value = tbNume.Text;
-                comanda.Parameters.Add("Prenume", OleDbType.Char, 20).Value = tbPrenume.Text;
-                comanda.Parameters.Add("Numar_de_Telefon", OleDbType.Char, 20).Value = tbNrTel.Text;
-                comanda.Parameters.Add("Email", OleDbType.Char, 20).Value = tbEmail.Text;
-                comanda.Parameters.Add("Adresa", OleDbType.Char, 20).Value = tbAdresa.Text;
+
+                if (!(string.IsNullOrWhiteSpace(tbNume.Text)))
+                    comanda.Parameters.Add("Nume", OleDbType.Char, 20).Value = tbNume.Text;
+                else
+                {
+                    isValid = false;
+                    MessageBox.Show("Introduceti numele!");
+                }
+
+                if (!string.IsNullOrWhiteSpace(tbPrenume.Text))
+                    comanda.Parameters.Add("Prenume", OleDbType.Char, 20).Value = tbPrenume.Text;
+                else
+                {
+                    MessageBox.Show("Introduceti prenumele!");
+                    isValid = false;
+                }
+
+                if (string.IsNullOrWhiteSpace(tbNrTel.Text))
+                {
+                    MessageBox.Show("Introduceti numarul de telefon!");
+                    isValid = false;
+                }
+                else if (tbNrTel.Text.Length != 10)
+                {
+                    MessageBox.Show("Numarul de telefon trebuie sa fie compus din 10 cifre!");
+                    isValid = false;
+                }
+                else if (!areDoarNumere(tbNrTel.Text))
+                {
+                    MessageBox.Show("Numarul de telefon trebuie sa fie compus doar din cifre!");
+                    isValid = false;
+                }
+                else
+                {
+                    comanda.Parameters.Add("Numar_de_Telefon", OleDbType.Char, 20).Value = tbNrTel.Text;
+                }
+
+                if (!(string.IsNullOrWhiteSpace(tbEmail.Text)))
+                    comanda.Parameters.Add("Email", OleDbType.Char, 20).Value = tbEmail.Text;
+                else
+                {
+                    MessageBox.Show("Introduceti emailul!");
+                    isValid = false;
+                }
+
+                if (!(string.IsNullOrWhiteSpace(tbAdresa.Text)))
+                    comanda.Parameters.Add("Adresa", OleDbType.Char, 20).Value = tbAdresa.Text;
+                else
+                {
+                    MessageBox.Show("Introduceti adresa!");
+                    isValid = false;
+                }
+
                 var selectat = gbUtilizator.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Name;
                 comanda.Parameters.Add("Tip", OleDbType.Char, 20).Value = selectat.ToString();
                 comanda.Parameters.Add("Data_de_Nastere", OleDbType.Char, 50).Value = dateTimePicker1.Text;
                 var sex = gbSex.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Name;
                 comanda.Parameters.Add("Sex", OleDbType.Char, 20).Value = sex.ToString();
-                comanda.Parameters.Add("Parola", OleDbType.Char, 20).Value = tbParola.Text;
 
-                comanda.ExecuteNonQuery();
+                if (!(string.IsNullOrWhiteSpace(tbParola.Text)))
+                    comanda.Parameters.Add("Parola", OleDbType.Char, 20).Value = tbParola.Text;
+                else
+                {
+                    MessageBox.Show("Introduceti parola");
+                    isValid = false;
+                }
 
-                MessageBox.Show("Clietul a fost adaugat.");
+                if (tbParola.Text != tbConfParola.Text)
+                {
+                    MessageBox.Show("Parolele nu se potrivesc!");
+                    isValid = false;
+                }
+
+                if (isValid)
+                {
+                    comanda.ExecuteNonQuery();
+                    MessageBox.Show("Date salvate cu succes! Clietul a fost adaugat.");
+                }
             }
             catch (Exception ex)
             {
@@ -342,6 +405,118 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
         {
             new LoginForm().Show();
             this.Hide();
+        }
+
+        private void tbNume_Enter(object sender, EventArgs e)
+        {
+            if(tbNume.Text == "Nume")
+            {
+                tbNume.Text = "";
+            }
+        }
+
+        private void tbNume_Leave(object sender, EventArgs e)
+        {
+            if (tbNume.Text == "")
+            {
+                tbNume.Text = "Nume";
+            }
+        }
+
+        private void tbPrenume_Enter(object sender, EventArgs e)
+        {
+            if (tbPrenume.Text == "Prenume")
+            {
+                tbPrenume.Text = "";
+            }
+        }
+
+        private void tbPrenume_Leave(object sender, EventArgs e)
+        {
+            if (tbPrenume.Text == "")
+            {
+                tbPrenume.Text = "Prenume";
+            }
+        }
+
+        private void tbNrTel_Enter(object sender, EventArgs e)
+        {
+            if(tbNrTel.Text == "Numar de telefon")
+            {
+                tbNrTel.Text = "";
+            }
+        }
+
+        private void tbNrTel_Leave(object sender, EventArgs e)
+        {
+            if (tbNrTel.Text == "")
+            {
+                tbNrTel.Text = "Numar de telefon";
+            }
+        }
+
+        private void tbEmail_Enter(object sender, EventArgs e)
+        {
+            if (tbEmail.Text == "Email")
+            {
+                tbEmail.Text = "";
+            }
+        }
+
+        private void tbEmail_Leave(object sender, EventArgs e)
+        {
+            if (tbEmail.Text == "")
+            {
+                tbEmail.Text = "Email";
+            }
+        }
+
+        private void tbAdresa_Enter(object sender, EventArgs e)
+        {
+            if(tbAdresa.Text == "Adresa")
+            {
+                tbAdresa.Text = "";
+            }
+        }
+
+        private void tbAdresa_Leave(object sender, EventArgs e)
+        {
+            if (tbAdresa.Text == "")
+            {
+                tbAdresa.Text = "Adresa";
+            }
+        }
+
+        private void tbParola_Enter(object sender, EventArgs e)
+        {
+            if(tbParola.Text == "Parola")
+            {
+                tbParola.Text = "";
+            }
+        }
+
+        private void tbParola_Leave(object sender, EventArgs e)
+        {
+            if (tbParola.Text == "")
+            {
+                tbParola.Text = "Parola";
+            }
+        }
+
+        private void tbConfParola_Enter(object sender, EventArgs e)
+        {
+            if(tbConfParola.Text == "Confirmare parola")
+            {
+                tbConfParola.Text = "";
+            }
+        }
+
+        private void tbConfParola_Leave(object sender, EventArgs e)
+        {
+            if (tbConfParola.Text == "")
+            {
+                tbConfParola.Text = "Confirmare parola";
+            }
         }
     }
 }

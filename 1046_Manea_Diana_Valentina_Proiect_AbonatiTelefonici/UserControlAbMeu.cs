@@ -15,27 +15,29 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
     {
         string connString;
         List<TipAbonament> listaAb = new List<TipAbonament>();
-        Clienti client;
+        Clienti client = new Clienti();
         public UserControlAbMeu()
         {
             InitializeComponent();
-            connString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Abonamente.accdb";
+            connString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Clienti.accdb";
             incarca_date();
         }
 
-        public UserControlAbMeu(Clienti client) : base()
+        public UserControlAbMeu(Clienti cl)
         {
-            this.client = client.Clone();
+            InitializeComponent();
+            connString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Clienti.accdb";
+            client = (Clienti)cl.Clone();
+            incarca_date();
         }
 
         private void UserControlAbMeu_Load(object sender, EventArgs e)
         {
-            //incarca_date();
         }
 
         private void incarca_date()
         {
-            //string numePrenume = client.Nume + " " + client.Prenume;
+            String numePrenume = client.Nume + " " + client.Prenume;
             listView1.Items.Clear();
             OleDbConnection conexiune = new OleDbConnection(connString);
             try
@@ -43,10 +45,8 @@ namespace _1046_Manea_Diana_Valentina_Proiect_AbonatiTelefonici
                 conexiune.Open();
                 OleDbCommand comanda = new OleDbCommand();
                 comanda.Connection = conexiune;
-                comanda.CommandText = "SELECT NumeAbonament, PretAbonament, InternetAbonament, MinuteInternationale, SMS, MinuteNationale, AreNetNelimitat FROM Abonamente";
-
-                //"SELECT f.Nume_Client, a.AreNetNelimitat, a.MinuteInternationale, a.MinuteNationale, a.InternetAbonament, a.NumeAbonament, " +
-                //"a.PretAbonament, a.SMS FROM Abonamente a, Facturi f WHERE a.NumeAbonament = f.Nume_Abonament AND f.Nume_Client LIKE '" + numePrenume + "'";
+                comanda.CommandText = "SELECT f.Nume_Client, f.Nume_Abonament, a.NumeAbonament, a.PretAbonament, a.InternetAbonament, a.MinuteInternationale, a.SMS, a.MinuteNationale," +
+                    " a.AreNetNelimitat FROM Abonamente a, Facturi f WHERE f.Nume_Client = '" + numePrenume + "' AND f.Nume_Abonament = a.NumeAbonament; ";
 
 
                 OleDbDataReader reader = comanda.ExecuteReader();
